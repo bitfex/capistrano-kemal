@@ -11,8 +11,10 @@ end
 namespace :deploy do
   after :updated, :build do
     on roles(:web) do
-      execute "cd '#{release_path}' && shards install --production"
-      execute "cd '#{release_path}' && crystal build --release #{fetch(:kemal_file)}"
+      within release_path do
+        execute :shards, "install --production"
+        execute :crystal, "build --release #{fetch(:kemal_file)}"
+      end
     end
   end
 end
@@ -20,7 +22,11 @@ end
 namespace :kemal do
   task :start do
     on roles(:web) do
-      execute "cd #{release_path}; KEMAL_ENV=#{fetch(:kemal_env)} ./#{fetch(:kemal_app)} &>> #{fetch(:kemal_log_file)} & echo $! > #{fetch(:kemal_pid)}"
+      within release_path do
+        with kemal_env: fetch(:kemal_env) do
+          execute fetch(:kemal_app).to_sym, "&>> #{fetch(:kemal_log_file)} & echo $! > #{fetch(:kemal_pid)}"
+        end
+      end
     end
   end
 
