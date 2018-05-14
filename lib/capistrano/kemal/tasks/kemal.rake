@@ -33,7 +33,7 @@ namespace :kemal do
 
   task :stop do
     on roles(:web) do
-      execute "test -f #{fetch(:kemal_pid)} && kill -INT $(cat #{fetch(:kemal_pid)}) && rm #{fetch(:kemal_pid)}"
+      execute "test -f #{fetch(:kemal_pid)} && kill -INT $(cat #{fetch(:kemal_pid)}) && rm #{fetch(:kemal_pid)} || echo Not running"
     end
   end
 end
