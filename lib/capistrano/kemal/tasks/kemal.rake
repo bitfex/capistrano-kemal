@@ -20,7 +20,7 @@ end
 namespace :kemal do
   task :start do
     on roles(:web) do
-      execute "cd #{release_path}; KEMAL_ENV=#{fetch(:kemal_env)} ./#{fetch(:kemal_app)} >> #{fetch(:kemal_log_file)} & echo $! > #{fetch(:kemal_pid)}"
+      execute "cd #{release_path}; KEMAL_ENV=#{fetch(:kemal_env)} ./#{fetch(:kemal_app)} &>> #{fetch(:kemal_log_file)} & echo $! > #{fetch(:kemal_pid)}"
     end
   end
 
