@@ -28,8 +28,8 @@ set :application, 'your-app'
 set :repo_url, 'git@github.com:username/your-app.git'
 set :deploy_to, '/home/user/apps/your-app/'
 set :kemal_env, 'production'
-set :kemal_file, 'src/bitfex.cr' # main source file
-set :kemal_app, 'bitfex' # compiled binary name (usually filename of main source file without `.cr` extension)
+set :kemal_file, 'src/app.cr' # main source file
+set :kemal_app, 'app' # compiled binary name (usually filename of main source file without `.cr` extension)
 
 after 'deploy:publishing', 'kemal:restart'
 ```
