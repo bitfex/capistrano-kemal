@@ -24,7 +24,7 @@ namespace :kemal do
     on roles(:web) do
       within release_path do
         with kemal_env: fetch(:kemal_env) do
-          execute fetch(:kemal_app).to_sym, "&>> #{fetch(:kemal_log_file)} & echo $! > #{fetch(:kemal_pid)}"
+          execute "./#{fetch(:kemal_app)}".to_sym, "&>> #{fetch(:kemal_log_file)} & echo $! > #{fetch(:kemal_pid)}"
         end
       end
     end
